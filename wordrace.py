@@ -18,6 +18,7 @@ def wpm_test(stdscr):
     while True:
         key = stdscr.getkey()
 
+        # ASII Value for Esc == 27, if Esc is pressed, breaks the loop
         if ord(key) == 27:
             break
 
