@@ -9,6 +9,13 @@ def start_screen(stdscr):
     stdscr.refresh()
     stdscr.getkey()
 
+def display_text(stdscr, target, current, wpm=0):
+        stdscr.addstr(target)
+     # If the character is correct, overlay it with green text
+        for i, char in enumerate(current):
+            stdscr.addstr(0, i, char, curses.color_pair(1))
+
+
 # Getting User Key Presses
 def wpm_test(stdscr):
     target_text = "Hello World das ist ein Test Text!"
@@ -17,12 +24,7 @@ def wpm_test(stdscr):
     # If the character is correct append it to current_text
     while True:
         stdscr.clear()
-        stdscr.addstr(target_text)
-
-        # If the character is correct, overlay it with green text
-        for char in current_text:
-            stdscr.addstr(char, curses.color_pair(1))
-
+        display_text(stdscr, target_text, current_text)
         stdscr.refresh()
 
         key = stdscr.getkey()
