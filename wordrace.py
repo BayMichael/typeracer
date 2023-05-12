@@ -16,14 +16,6 @@ def wpm_test(stdscr):
     
     # If the character is correct append it to current_text
     while True:
-        key = stdscr.getkey()
-
-        # ASII Value for Esc == 27, if Esc is pressed, breaks the loop
-        if ord(key) == 27:
-            break
-
-        current_text.append(key)
-
         stdscr.clear()
         stdscr.addstr(target_text)
 
@@ -33,7 +25,19 @@ def wpm_test(stdscr):
 
         stdscr.refresh()
 
+        key = stdscr.getkey()
 
+        # ASII Value for Esc == 27, if Esc is pressed, breaks the loop
+        if ord(key) == 27:
+            break
+        # If backspace is hit, pop off last char in list
+        if key in ("KEY_BACKSPACE", "\b", "\x7f"):
+            if len(current_text) > 0:
+                current_text.pop()
+        else:
+            current_text.append(key)
+
+        
 # Main Function
 # Styling the terminal 
 def main(stdscr):
