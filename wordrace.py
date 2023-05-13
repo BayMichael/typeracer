@@ -9,11 +9,19 @@ def start_screen(stdscr):
     stdscr.refresh()
     stdscr.getkey()
 
+# Function for Displaying the text
 def display_text(stdscr, target, current, wpm=0):
         stdscr.addstr(target)
+
+
      # If the character is correct, overlay it with green text
         for i, char in enumerate(current):
-            stdscr.addstr(0, i, char, curses.color_pair(1))
+            correct_char = target[i]
+            color = curses.color_pair(1)
+            # If the character is incorrect, overlay it with red text
+            if char != correct_char:
+                color = curses.color_pair(2)
+            stdscr.addstr(0, i, char, color)
 
 
 # Getting User Key Presses
