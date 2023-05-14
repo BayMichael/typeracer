@@ -31,15 +31,22 @@ def wpm_test(stdscr):
     target_text = "Hello World das ist ein Test Text!"
     current_text = []
     wpm = 0
+    start_time = time.time()
+    stdscr.nodelay(True)
     
-    
-    # If the character is correct append it to current_text
     while True:
+        time_elapsed = max(time.time() - start_time, 1)
+        # Calculating WPM, average word 5 chars
+        wpm = round((len(current_text) / (time_elapsed / 60)) / 5)
+
         stdscr.clear()
         display_text(stdscr, target_text, current_text, wpm)
         stdscr.refresh()
 
-        key = stdscr.getkey()
+        try:
+            key = stdscr.getkey()
+        except:
+            continue
 
         # ASII Value for Esc == 27, if Esc is pressed, breaks the loop
         if ord(key) == 27:
