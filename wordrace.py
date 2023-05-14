@@ -1,5 +1,6 @@
 import curses
 from curses import wrapper
+import time
 
 # Starts the screen, Displays Greeting and Instruction to press a key to advance
 def start_screen(stdscr):
@@ -12,6 +13,7 @@ def start_screen(stdscr):
 # Function for Displaying the text
 def display_text(stdscr, target, current, wpm=0):
         stdscr.addstr(target)
+        stdscr.addstr(1, 0, f"WPM: {wpm}")
 
 
      # If the character is correct, overlay it with green text
@@ -28,11 +30,13 @@ def display_text(stdscr, target, current, wpm=0):
 def wpm_test(stdscr):
     target_text = "Hello World das ist ein Test Text!"
     current_text = []
+    wpm = 0
+    
     
     # If the character is correct append it to current_text
     while True:
         stdscr.clear()
-        display_text(stdscr, target_text, current_text)
+        display_text(stdscr, target_text, current_text, wpm)
         stdscr.refresh()
 
         key = stdscr.getkey()
@@ -47,7 +51,8 @@ def wpm_test(stdscr):
         elif len(current_text) < len(target_text):
             current_text.append(key)
 
-        
+
+
 # Main Function
 # Styling the terminal 
 def main(stdscr):
